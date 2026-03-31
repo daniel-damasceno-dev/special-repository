@@ -1,0 +1,82 @@
+## Análise do Código ✅
+
+O código está **funcionalmente correto** e demonstra bem o uso de interfaces em Java. Aqui vai a análise completa:
+
+---
+
+### ✅ O que está bom
+
+- **Interface bem definida** — contrato claro com getters e métodos de manipulação de estoque
+- **Implementação correta** com `implements` e `@Override` em todos os métodos
+- **Polimorfismo aplicado** — `Produto produto = new ProdutoImpl(...)` (referência do tipo da interface, não da classe concreta)
+- **Lógica de negócio correta** no `removerQuantidade`, validando estoque antes de subtrair
+
+---
+
+### ⚠️ Problemas encontrados
+
+**1. Typo no nome do método — o mais importante**
+
+```java
+// Interface e implementação têm o mesmo erro — ao menos são consistentes
+void removerQUantidade(int quantidade); // ❌ "QU" maiúsculo
+```
+
+Renomeie para `removerQuantidade`. Como o erro está nos dois lugares (interface + classe), compila — mas é ruim para legibilidade e convenção Java (camelCase).
+
+---
+
+**2. Encoding quebrado no `Main.java`**
+
+```java
+// Você está vendo isso no console:
+"após" aparece como "ap�s"
+```
+
+Isso é problema de encoding do arquivo. No IntelliJ: **File → File Encoding → UTF-8** no arquivo e no projeto.
+
+---
+
+**3. Sem validação de entrada negativa**
+
+```java
+produto.adicionarQuantidade(-5); // seria aceito e diminuiria o estoque silenciosamente
+```
+
+Considere adicionar:
+```java
+@Override
+public void adicionarQuantidade(int quantidade) {
+    if (quantidade <= 0) {
+        System.out.println("Quantidade deve ser positiva!");
+        return;
+    }
+    this.quantidade += quantidade;
+}
+```
+
+---
+
+**4. `System.out.println` para erros de negócio**
+
+Para um exercício está ótimo, mas no mundo real `removerQuantidade` deveria lançar uma exceção ao invés de só imprimir:
+
+```java
+throw new IllegalStateException("Quantidade insuficiente em estoque!");
+```
+
+---
+
+### 📋 Resumo
+
+| Item | Status |
+|---|---|
+| Estrutura da interface | ✅ |
+| Implementação dos métodos | ✅ |
+| Polimorfismo | ✅ |
+| Lógica de estoque | ✅ |
+| Nome `removerQUantidade` | ⚠️ Typo |
+| Encoding (acentos) | ⚠️ Corrigir UTF-8 |
+| Validação de negativos | 💡 Melhoria |
+
+Bom exercício — a estrutura de separar interface, implementação e `Main` já demonstra bom raciocínio de design.
