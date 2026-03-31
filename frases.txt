@@ -80,3 +80,5 @@ throw new IllegalStateException("Quantidade insuficiente em estoque!");
 | Validação de negativos | 💡 Melhoria |
 
 Bom exercício — a estrutura de separar interface, implementação e `Main` já demonstra bom raciocínio de design.
+
+testandooo
