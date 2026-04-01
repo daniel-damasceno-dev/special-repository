@@ -1,0 +1,14 @@
+Aperta a tecla **`q`**.
+
+O `git log` abre no **less** (um paginador de terminal), e `q` é o comando para sair dele.
+
+Outros atalhos úteis enquanto estiver dentro:
+
+| Tecla | Ação |
+|---|---|
+| `q` | Sair |
+| `j` / `k` | Descer / subir uma linha |
+| `espaço` | Avançar uma página |
+| `b` | Voltar uma página |
+| `G` | Ir para o final |
+| `g` | Ir para o início |
